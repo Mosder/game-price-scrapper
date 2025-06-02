@@ -123,6 +123,9 @@ async fn scrape_g2a(
                 .await?
                 .get(1..3)
                 .unwrap()
+                .split('%')
+                .next()
+                .unwrap()
                 .parse::<i32>()?
             } else {0};
             // check if sale is at least minimum
@@ -255,6 +258,9 @@ async fn scrape_cdkeys(
                 .text()
                 .await?
                 .get(1..3)
+                .unwrap()
+                .split('%')
+                .next()
                 .unwrap()
                 .parse::<i32>()?
             } else {0};
