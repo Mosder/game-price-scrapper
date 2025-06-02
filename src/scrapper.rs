@@ -313,19 +313,19 @@ pub async fn scrape(
     if let Err(err) = scrape_g2a(
         &driver, &mut map, price_min, price_max, min_sale, &genre
     ).await {
-        println!("Encountered an error with g2a scrapping: {:?}", err);
+        println!("Encountered an error with g2a scrapping:\n{:?}\n", err);
     }
     // scrape kinguin
     if let Err(err) = scrape_kinguin(
         &driver, &mut map, price_min, price_max, min_sale, &genre
     ).await {
-        println!("Encountered an error with kinguin scrapping: {:?}", err);
+        println!("Encountered an error with kinguin scrapping:\n{:?}\n", err);
     }
     // scrape cdkeys
     if let Err(err) = scrape_cdkeys(
         &driver, &mut map, price_min, price_max, min_sale, &genre
     ).await {
-        println!("Encountered an error with cdkeys scrapping: {:?}", err);
+        println!("Encountered an error with cdkeys scrapping:\n{:?}\n", err);
     }
     map
 }
