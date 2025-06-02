@@ -21,17 +21,17 @@ pub enum Genre {
 use Genre::*;
 
 #[derive(Debug)]
-struct StoreData {
-    price: f32,
-    sale: i32,
-    link: String
+pub struct StoreData {
+    pub price: f32,
+    pub sale: i32,
+    pub link: String
 }
 
 #[derive(Debug)]
 pub struct GameData {
-    g2a: Option<StoreData>,
-    kinguin: Option<StoreData>,
-    cdkeys: Option<StoreData>
+    pub g2a: Option<StoreData>,
+    pub kinguin: Option<StoreData>,
+    pub cdkeys: Option<StoreData>
 }
 
 impl GameData {

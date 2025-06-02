@@ -1,12 +1,15 @@
+mod scrapper;
+mod writer;
+
 use scrapper::Genre;
 use std::io;
-
-mod scrapper;
 
 const DEFAULT_MIN_PRICE: f32 = 0.0;
 const DEFAULT_MAX_PRICE: f32 = 150.0;
 const DEFAULT_MIN_SALE: i32 = 30;
 const DEFAULT_GENRE_INDEX: u8 = 0;
+
+const CSV_DIR_NAME: &str = "csv";
 
 fn rdln(message: String) -> String {
     let mut buffer = String::new();
@@ -56,31 +59,30 @@ async fn main() {
             min_price = x;
         }
     }
-    else {println!("penis");}
     if let Ok(x) = rdln(max_price_msg).trim().parse::<f32>() {
         if x >= 0.0 {
             max_price = x;
         }
     }
-    else {println!("penis");}
     if let Ok(x) = rdln(min_sale_msg).trim().parse::<i32>() {
         if x >= 0 {
             min_sale = x;
         }
     }
-    else {println!("penis");}
     if let Ok(x) = rdln(genre_index_msg).trim().parse::<u8>() {
         if x < 7 {
             genre_index = x;
         }
     }
-    else {let x = rdln(String::from("asd")); println!("{}", x);}
 
+    // scrape
     let game_map = scrapper::scrape(
         min_price,
         max_price,
         min_sale,
         get_genre_from_index(genre_index)
     ).await;
-    println!("{:?}", game_map);
+
+    // save to csv
+    writer::write_to_csv(CSV_DIR_NAME, game_map);
 }
